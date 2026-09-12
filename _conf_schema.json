@@ -1,0 +1,7 @@
+{
+    "crossword_timeout": {
+        "title": "纵横飞花令超时时间(秒)",
+        "type": "int",
+        "default": 90
+    }
+}
