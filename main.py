@@ -235,19 +235,19 @@ class PoetryFlowerPlugin(Star):
 
     # ==================== 道具（纵横专属） ====================
 
-    @filter.command("诗词道具", alias={"使用道具", "道具", "使用"})
+    @filter.command("花令道具", alias={"使用花令道具"})
     async def use_item(self, event: AstrMessageEvent, item: str = "", n: str = ""):
-        """使用纵横飞花令道具：/诗词道具 文字狱 汉字 | /诗词道具 红杏出墙"""
+        """使用纵横飞花令道具：/花令道具 文字狱 汉字 | /花令道具 红杏出墙"""
         uid = str(event.get_sender_id())
         uname = event.get_sender_name() or f"用户{uid}"
         item = (item or "").strip()
         if item not in ITEMS:
-            # 非本插件道具：静默放行（由猜诗句/求婚插件的同名命令处理，避免双重响应）
+            # 非本插件道具：静默放行（由猜诗句/求婚插件处理，避免命令冲突）
             return
         session_id = str(event.get_group_id() or event.get_session_id())
         engine = self.active_games.get(session_id)
         if engine is None:
-            yield event.plain_result("当前群聊没有进行中的纵横飞花令。")
+            yield event.plain_result("当前群聊没有进行中的纵横飞花令。发送 /花令道具 查看用法。")
             return
         if self.pm.item_count(uid, item, uname) <= 0:
             yield event.plain_result(f"道具【{item}】数量不足。")
@@ -255,7 +255,7 @@ class PoetryFlowerPlugin(Star):
             self.pm.consume_item(uid, item, 1, uname)
             if item == "文字狱":
                 raw = str(event.get_message_str() or "").strip()
-                tail = re.sub(r"^[/／]?\s*(?:诗词道具|使用道具|道具|使用)\s*", "", raw, flags=re.IGNORECASE)
+                tail = re.sub(r"^[/／]?\s*(?:花令道具|使用花令道具)\s*", "", raw, flags=re.IGNORECASE)
                 tail = re.sub(r"^文字狱\s*", "", tail).strip()
                 resp = engine.step("item_wz", uid, uname, tail)
             elif item == "红杏出墙":

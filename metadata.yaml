@@ -1,6 +1,6 @@
 name: astrbot_plugin_poetry_flower
 display_name: 纵横飞花令
 desc: 纵横飞花令 - 棋盘拼字 + 字数池规则 + 存档体系 + 专属道具(文字狱/红杏出墙) - 依赖诗词底座与秋烨枢纽
-version: v1.0.1
+version: v1.0.2
 author: ALin
 repo: https://github.com/sfw2099/astrbot_plugin_poetry_flower
